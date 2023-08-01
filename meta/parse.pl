@@ -1425,6 +1425,11 @@ sub ProcessType
         return "SAI_ATTR_VALUE_TYPE_INT32_LIST";
     }
 
+    if ($type eq "sai_double_t")
+    {
+        return "SAI_ATTR_VALUE_TYPE_DOUBLE";
+    }
+
     if ($type =~ /^(sai_\w+_t)$/)
     {
         my $prefix = "SAI_ATTR_VALUE_TYPE";
@@ -3977,6 +3982,7 @@ sub ProcessStructItem
     return if $type =~ /^sai_(u?int\d+|ip[46]|mac|cos|vlan_id|queue_index)_t/; # primitives, we could get that from defines
     return if $type =~ /^u?int\d+_t/;
     return if $type =~ /^sai_[su]\d+_list_t/;
+    return if $type =~ /^sai_double_t/;
 
     if ($type eq "sai_object_id_t" or $type eq "sai_object_list_t")
     {
